@@ -5,11 +5,12 @@ from .forms import TareaForm
 # Create your views here.
 
 def home(request):
-    tareas = Tarea.objects.all()
-    context={'tareas': tareas}
+    tarea = Tarea.objects.all()
+    context={'tareas': tarea}
     return render(request, 'actividad/home.html', context)
 
 def agregar(request):
+    
     if request.method == "POST":
         form = TareaForm(request.POST)
         if form.is_valid():
@@ -17,11 +18,8 @@ def agregar(request):
             return redirect('home')
     else:
         form = TareaForm()
-
-    context={'form':form}
-    #tarea = Tarea.objects.get(id=tarea_id)
-    return render(request, 'actividad/agregar.html', context)
-
+        context={'form':form}
+        return render(request, 'actividad/agregar.html', context)
 
 ##def agregar(request):
     if form.is_valid():
